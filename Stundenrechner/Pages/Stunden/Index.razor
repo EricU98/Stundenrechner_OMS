@@ -1,0 +1,145 @@
+﻿@page "/"
+@page "/stundenrechner"
+
+@{
+
+
+
+
+}
+
+
+
+<form>
+
+    <div class="card border-success">
+            <div class="card-header">
+                <h3>Startdatum</h3>
+            </div>
+        <div class="card-body bg-success bg-opacity-25  ">
+
+            <input class="input-group form-control" type="date" />
+            <br />
+            <div class="input-group mb-3 text-center ">
+                <select class="form-control">
+                    @{
+                        foreach (var item in hours)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+                <span class="input-group-text" id="basic-addon1">:</span>
+                <select class="form-control">
+                    @{
+                        foreach (var item in minutes)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+                <span class="input-group-text" id="basic-addon1">:</span>
+                <select class="form-control">
+                    @{
+                        foreach (var item in seconds)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <!--
+
+    HIER ENDDATUM EINFÜGEN
+
+    -->
+
+
+
+    <br />
+    <hr />
+    <br />
+    <div class="card border-success">
+        <div class="card-header">
+                <h3>Enddatum</h3>
+            </div>
+        <div class="card-body bg-success bg-opacity-25 ">
+
+            <input class="input-group form-control" type="date" />
+            <br />
+            <div class="input-group mb-3 text-center ">
+                <select class="form-control">
+                    @{
+                        foreach (var item in hours)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+                <span class="input-group-text" id="basic-addon1">:</span>
+                <select class="form-control">
+                    @{
+                        foreach (var item in minutes)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+                <span class="input-group-text" id="basic-addon1">:</span>
+                <select class="form-control">
+                    @{
+                        foreach (var item in seconds)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    }
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    
+</form>
+<br />
+
+<div class="card">
+    <a class="card-body btn bg-success bg-opacity-50" href="#">
+        <h3><b>Zeit erfassen</b></h3>
+    </a>
+</div>
+
+@*<a>@stunde : @minute : @sekunde</a>*@
+
+@code {
+
+
+
+
+
+    private IEnumerable<string> hours;
+    private IEnumerable<string> minutes;
+    private IEnumerable<string> seconds;
+
+    private int hourNow = DateTime.Now.Hour;
+    private int minuteNow = DateTime.Now.Minute;
+
+
+
+    //private int stunde = DateTime.Now.Hour;
+    //private int minute = DateTime.Now.Minute;
+    //private int sekunde = DateTime.Now.Second;
+
+
+    protected override void OnInitialized()
+    {
+        hours = Enumerable.Range(hourNow, 23).Select(i => (DateTime.MinValue.AddHours(i)).ToString("HH"));
+        minutes = Enumerable.Range(0, 60).Select(i => (DateTime.MinValue.AddMinutes(i)).ToString("mm"));
+        seconds = Enumerable.Range(0, 61).Select(i => (DateTime.MinValue.AddSeconds(i)).ToString("ss"));
+    }
+
+}
